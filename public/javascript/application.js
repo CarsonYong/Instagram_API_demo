@@ -39,8 +39,13 @@ $(document).ready(function() {
     });
       
   });
-  $("button").on("click", function() {
+  $("#next").on("click", function() {
     current++;  
+    render();
+  });
+
+  $("#previous").on("click", function() {
+    current--;
     render();
   });
 
