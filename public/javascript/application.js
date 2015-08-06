@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  $("#previous").hide();
+  $("#next").hide();
   var current = 0;
   var arr = [];
 
@@ -8,7 +10,14 @@ $(document).ready(function() {
     $("#images").empty();
     if (current < arr.length) {
       var imageURL = arr[current].images.standard_resolution.url;
-      $("<img src='"+imageURL+"'></img>").appendTo("#images");   
+      var caption = arr[current].caption.text;
+      var numComments = arr[current].comments.count;
+      var numLikes = arr[current].likes.count;
+      var url = arr[current].link;
+      $("<a href='"+url+"' target='_blank'><img src='"+imageURL+"'></img></a>").appendTo("#images"),
+      $("<p><b>Captions: </b>'"+caption+"'</p>").appendTo("#images"),
+      $("<p><b>Number of comments: </b'"+numComments+"'</p>").appendTo("#images"),
+      $("<p><b>Number of likes: </b>'"+numLikes+"'</p>").appendTo("#images");   
     }  
   }
 
@@ -35,10 +44,16 @@ $(document).ready(function() {
         //     })
         //   }
         // })
-      }
+      },
+        complete: function(){
+          $("#previous").show(),
+          $("#next").show()
+        }
+
     });
       
   });
+
   $("#next").on("click", function() {
     current++;  
     render();
