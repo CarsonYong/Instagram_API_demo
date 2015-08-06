@@ -14,9 +14,10 @@ $(document).ready(function() {
       var numComments = arr[current].comments.count;
       var numLikes = arr[current].likes.count;
       var url = arr[current].link;
-      $("<a href='"+url+"' target='_blank'><img src='"+imageURL+"'></img></a>").appendTo("#images"),
-      $("<p><b>Captions: </b>'"+caption+"'</p>").appendTo("#images"),
-      $("<p><b>Number of comments: </b'"+numComments+"'</p>").appendTo("#images"),
+      $("<a href='"+url+"' target='_blank'><img src='"+imageURL+"'></img></a>").appendTo("#images");
+      console.log(numComments);
+      $("<p><b>Captions: </b>'"+caption+"'</p>").appendTo("#images");
+      $("<p><b>Number of comments: </b>"+numComments+"</p>").appendTo("#images");
       $("<p><b>Number of likes: </b>'"+numLikes+"'</p>").appendTo("#images");   
     }  
   }
@@ -55,6 +56,9 @@ $(document).ready(function() {
   });
 
   $("#next").on("click", function() {
+    $("#images").fadeOut('normal', function(){
+      $("#images").fadeIn();
+    });
     current++;  
     render();
   });
